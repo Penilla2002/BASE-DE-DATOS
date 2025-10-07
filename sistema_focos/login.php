@@ -36,10 +36,10 @@ if ($_POST) {
             }
             exit();
         } else {
-            echo "Contraseña incorrecta. Grandicimo pendejo";
+            echo "Contraseña incorrecta. ";
         }
     } else {
-        echo "Usuario no encontrado. Grandicimo pendejo";
+        echo "Usuario no encontrado. ";
     }
 }
 ?>
