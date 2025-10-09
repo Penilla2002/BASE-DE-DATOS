@@ -223,18 +223,6 @@ if ($_POST) {
 
             <button type="submit" class="btn-login">Ingresar al Sistema</button>
         </form>
-
-        <div class="demo-accounts">
-            <h3>💡 Cuentas de Demo</h3>
-            <div class="demo-account">
-                <span>Administrador:</span>
-                <span>admin / admin123</span>
-            </div>
-            <div class="demo-account">
-                <span>Vendedor:</span>
-                <span>vendedor1 / admin123</span>
-            </div>
-        </div>
     </div>
 </body>
 </html>
