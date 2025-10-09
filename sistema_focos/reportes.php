@@ -2,7 +2,7 @@
 session_start();
 // Si no está logueado o no es administrador, redirigir
 if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] != 'administrador') {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
 }
 
@@ -10,98 +10,274 @@ include 'conexion.php';
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Reportes - Sistema de Focos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes - Sistema de Focos LED</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 20px; 
-            background-color: #f5f5f5;
+        /* ===== VARIABLES DE COLOR AMARILLO/DORADO ===== */
+        :root {
+            --primary-color: #f59e0b;
+            --primary-dark: #d97706;
+            --secondary-color: #fbbf24;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #3b82f6;
+            
+            /* Degradados Amarillos/Dorados */
+            --gradient-primary: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-secondary: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            --gradient-gold: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
+            --gradient-sunshine: linear-gradient(135deg, #fef3c7 0%, #fcd34d 50%, #f59e0b 100%);
+            --gradient-success: linear-gradient(135deg, #b9b610ff 0%, #968005ff 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            --gradient-dark: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            
+            /* Colores neutros */
+            --light-bg: #fffbeb;
+            --card-bg: #ffffff;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --border-color: #fde68a;
+            
+            /* Sombras */
+            --shadow-sm: 0 1px 2px 0 rgba(245, 158, 11, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(245, 158, 11, 0.1), 0 2px 4px -1px rgba(245, 158, 11, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(245, 158, 11, 0.1), 0 4px 6px -2px rgba(245, 158, 11, 0.05);
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-sunshine);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        h1, h2, h3 {
-            color: #333;
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
         }
-        table { 
-            border-collapse: collapse; 
-            width: 100%; 
-            margin: 15px 0;
-            background: white;
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
         }
-        th, td { 
-            border: 1px solid #ddd; 
-            padding: 12px; 
-            text-align: left; 
+
+        .header h1 {
+            color: var(--primary-dark);
+            font-size: 32px;
+            margin-bottom: 10px;
         }
-        th { 
-            background-color: #4CAF50; 
-            color: white;
-            font-weight: bold;
+
+        .welcome-message {
+            color: var(--text-light);
+            font-size: 16px;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+
+        .welcome-message strong {
+            color: var(--primary-color);
         }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .stock-bajo { 
-            background-color: #ffeaa7 !important; 
-        }
-        .stock-critico {
-            background-color: #ffcccc !important;
-        }
+
+        /* Estadísticas */
         .estadisticas {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
         }
+
         .estadistica-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
             text-align: center;
-            border-left: 4px solid #4CAF50;
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s ease;
         }
+
+        .estadistica-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
         .numero-grande {
-            font-size: 24px;
+            font-size: 32px;
             font-weight: bold;
-            color: #4CAF50;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
         }
-        .btn-descargar {
-            background: #007bff;
+
+        /* Tablas */
+        h2, h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--gradient-gold);
             color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            margin: 10px 0;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .btn-descargar:hover {
-            background: #0056b3;
+
+        tr:nth-child(even) {
+            background-color: var(--light-bg);
         }
+
+        tr:hover {
+            background-color: #fef3c7;
+        }
+
+        /* Estados de stock */
+        .stock-bajo {
+            background-color: #fef3c7 !important;
+            border-left: 4px solid var(--warning-color);
+        }
+
+        .stock-critico {
+            background-color: #fee2e2 !important;
+            border-left: 4px solid var(--danger-color);
+        }
+
+        /* Ventas */
+        .venta-container {
+            margin: 20px 0;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
         .venta-header {
-            background-color: #e3f2fd !important;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        .venta-detalle {
+            background-color: var(--light-bg);
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--gradient-success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--gradient-danger);
+            color: white;
+        }
+
+        .btn-info {
+            background: var(--info-color);
+            color: white;
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Resumen total */
+        .resumen-total {
+            background: var(--gradient-success);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 25px 0;
+            font-size: 18px;
             font-weight: bold;
         }
-        .venta-detalle {
-            background-color: #fafafa;
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📊 Reportes del Sistema - Local de Focos</h1>
-        <p>Bienvenido Administrador, <strong><?php echo $_SESSION['nombre']; ?></strong></p>
+        <div class="header">
+            <h1>📊 Reportes del Sistema - Focos LED</h1>
+            <p class="welcome-message">Bienvenido Administrador, <strong><?php echo $_SESSION['nombre']; ?></strong></p>
+        </div>
         
         <!-- Estadísticas Rápidas -->
         <div class="estadisticas">
@@ -138,7 +314,7 @@ include 'conexion.php';
                 <div>Ingresos Totales</div>
             </div>
             <div class="estadistica-card">
-                <div class="numero-grande" style="color: <?php echo $stock_bajo['stock_bajo'] > 0 ? '#e74c3c' : '#4CAF50'; ?>">
+                <div class="numero-grande" style="color: <?php echo $stock_bajo['stock_bajo'] > 0 ? '#ef4444' : '#10b981'; ?>">
                     <?php echo $stock_bajo['stock_bajo']; ?>
                 </div>
                 <div>Productos con Stock Bajo</div>
@@ -151,10 +327,9 @@ include 'conexion.php';
             </div>
         </div>
 
-        <!-- Ventas Recientes Detalladas - ENFOQUE ALTERNATIVO -->
+        <!-- Ventas Recientes Detalladas -->
         <h3>🛒 Ventas Recientes Detalladas</h3>
         <?php
-        // ENFOQUE ALTERNATIVO: Primero obtener las ventas, luego los detalles por separado
         $sql_ventas = "SELECT id, fecha, hora, total 
                        FROM ventas 
                        ORDER BY fecha DESC, hora DESC 
@@ -167,13 +342,11 @@ include 'conexion.php';
             while($venta = $result_ventas->fetch_assoc()) {
                 $total_periodo += $venta['total'];
                 
-                // Mostrar cabecera de la venta
-                echo "<div style='margin: 20px 0; border: 1px solid #ddd; border-radius: 5px;'>";
-                echo "<div class='venta-header' style='padding: 10px; background: #e3f2fd;'>";
+                echo "<div class='venta-container'>";
+                echo "<div class='venta-header'>";
                 echo "<strong>Venta #" . $venta['id'] . "</strong> - " . $venta['fecha'] . " " . $venta['hora'] . " - Total: <strong>$" . number_format($venta['total'], 2) . "</strong>";
                 echo "</div>";
                 
-                // Obtener detalles de esta venta
                 $sql_detalles = "SELECT p.nombre, dv.cantidad, dv.precio_unitario, dv.subtotal 
                                 FROM detalle_ventas dv 
                                 INNER JOIN productos p ON dv.producto_id = p.id 
@@ -181,7 +354,7 @@ include 'conexion.php';
                 $result_detalles = $conexion->query($sql_detalles);
                 
                 if ($result_detalles && $result_detalles->num_rows > 0) {
-                    echo "<table style='width: 100%; margin: 0;'>";
+                    echo "<table>";
                     echo "<tr><th>Producto</th><th>Cantidad</th><th>Precio Unit.</th><th>Subtotal</th></tr>";
                     
                     while($detalle = $result_detalles->fetch_assoc()) {
@@ -194,18 +367,18 @@ include 'conexion.php';
                     }
                     echo "</table>";
                 } else {
-                    echo "<p style='padding: 10px;'>No hay detalles para esta venta.</p>";
+                    echo "<p style='padding: 15px; text-align: center; color: var(--text-light);'>No hay detalles para esta venta.</p>";
                 }
                 
                 echo "</div>";
             }
             
-            echo "<div style='background-color: #e8f5e8; padding: 15px; border-radius: 5px; margin-top: 20px;'>";
+            echo "<div class='resumen-total'>";
             echo "<strong>Total del período: $" . number_format($total_periodo, 2) . "</strong>";
             echo "</div>";
             
         } else {
-            echo "<p>No hay ventas registradas.</p>";
+            echo "<p style='text-align: center; padding: 20px; color: var(--text-light);'>No hay ventas registradas.</p>";
         }
         ?>
 
@@ -256,14 +429,14 @@ include 'conexion.php';
                 echo "</tr>";
             }
             
-            echo "<tr style='background-color: #e3f2fd;'>";
+            echo "<tr style='background: var(--gradient-primary); color: white;'>";
             echo "<td colspan='4' style='text-align: right; font-weight: bold;'>Valor total del inventario:</td>";
             echo "<td colspan='2' style='font-weight: bold; font-size: 16px;'>$" . number_format($valor_total_inventario, 2) . "</td>";
             echo "</tr>";
             
             echo "</table>";
         } else {
-            echo "<p>No hay productos en el inventario.</p>";
+            echo "<p style='text-align: center; padding: 20px; color: var(--text-light);'>No hay productos en el inventario.</p>";
         }
 
         // Cerrar conexión
@@ -271,17 +444,17 @@ include 'conexion.php';
         ?>
         
         <!-- Botones de acción -->
-        <div style="margin-top: 20px;">
-            <a href="ventas.php" class="btn-descargar">🛒 Ir a Ventas</a>
-            <a href="gestion_usuarios.php" class="btn-descargar" style="background: #e83e8c;">👥 Gestión de Usuarios</a>
-            <a href="logout.php" style="background: #dc3545; margin-left: 10px;" class="btn-descargar">🚪 Cerrar Sesión</a>
-            <a href="gestion_inventario.php" class="btn-descargar" style="background: #17a2b8;">📦 Gestión de Inventario</a>        
-            <a href="reportes_avanzados.php" class="btn-descargar" style="background: #6f42c1;">📅 Reportes por Período</a>
+        <div class="btn-container">
+            <a href="ventas.php" class="btn btn-primary">🛒 Ir a Ventas</a>
+            <a href="gestion_usuarios.php" class="btn btn-purple">👥 Gestión de Usuarios</a>
+            <a href="gestion_inventario.php" class="btn btn-info">📦 Gestión de Inventario</a>
+            <a href="reportes_avanzados.php" class="btn btn-success">📅 Reportes por Período</a>
+            <a href="logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
         </div>
         
-        <p style="margin-top: 20px; color: #666; font-size: 12px;">
-            Sistema de Focos - Reportes generados el <?php echo date('d/m/Y H:i:s'); ?>
-        </p>
+        <div class="footer">
+            Sistema de Focos LED - Reportes generados el <?php echo date('d/m/Y H:i:s'); ?>
+        </div>
     </div>
 </body>
 </html>
