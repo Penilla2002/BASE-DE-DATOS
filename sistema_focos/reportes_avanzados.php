@@ -637,7 +637,7 @@ switch ($periodo) {
             <a href="reportes.php" class="btn btn-info">📊 Reportes Normales</a>
             <a href="gestion_inventario.php" class="btn btn-success">📦 Gestión Inventario</a>
             <a href="gestion_usuarios.php" class="btn btn-purple">👥 Gestión Usuarios</a>
-            <a href="ventas.php" class="btn btn-warning">🛒 Ir a Ventas</a>
+            <a href="ventas.php" class="btn btn-primary">🛒 Ir a Ventas</a>
             <a href="logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
         </div>
 

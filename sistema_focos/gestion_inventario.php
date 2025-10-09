@@ -745,7 +745,7 @@ $conexion->query($sql_create_table);
         <!-- Navegación inferior -->
         <div class="nav-inferior">
             <a href="reportes.php" class="btn btn-info">📊 Volver a Reportes</a>
-            <a href="ventas.php" class="btn btn-success">🛒 Ir a Ventas</a>
+            <a href="ventas.php" class="btn btn-primary">🛒 Ir a Ventas</a>
             <a href="logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
         </div>
     </div>

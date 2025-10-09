@@ -463,7 +463,7 @@ if (isset($_POST['editar_usuario'])) {
                 <div>Total Usuarios</div>
             </div>
             <div class="stat-card">
-                <div class="stat-numero" style="color: var(--success-color);"><?php echo $stats['usuarios_activos']; ?></div>
+                <div class="stat-numero" style="color: var(--warning-color);"><?php echo $stats['usuarios_activos']; ?></div>
                 <div>Usuarios Activos</div>
             </div>
             <div class="stat-card">
@@ -586,7 +586,7 @@ if (isset($_POST['editar_usuario'])) {
 
         <!-- Pestaña 4: Editar Usuario -->
         <div id="tab-editar" class="tab-content">
-            <div class="seccion seccion-info">
+            <div class="seccion">
                 <h2>✏️ Editar Información de Usuario</h2>
                 <form method="POST">
                     <div class="form-group">
@@ -665,7 +665,7 @@ if (isset($_POST['editar_usuario'])) {
             <a href="reportes.php" class="btn btn-info">📊 Reportes</a>
             <a href="gestion_inventario.php" class="btn btn-success">📦 Inventario</a>
             <a href="reportes_avanzados.php" class="btn btn-purple">📅 Reportes Avanzados</a>
-            <a href="ventas.php" class="btn btn-warning">🛒 Ventas</a>
+            <a href="ventas.php" class="btn btn-primary">🛒 Ventas</a>
             <a href="logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
         </div>
     </div>

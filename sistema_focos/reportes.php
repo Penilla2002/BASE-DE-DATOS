@@ -31,7 +31,7 @@ include 'conexion.php';
             --gradient-secondary: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             --gradient-gold: linear-gradient(135deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
             --gradient-sunshine: linear-gradient(135deg, #fef3c7 0%, #fcd34d 50%, #f59e0b 100%);
-            --gradient-success: linear-gradient(135deg, #b9b610ff 0%, #968005ff 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
             --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             --gradient-dark: linear-gradient(135deg, #1f2937 0%, #111827 100%);
@@ -314,7 +314,7 @@ include 'conexion.php';
                 <div>Ingresos Totales</div>
             </div>
             <div class="estadistica-card">
-                <div class="numero-grande" style="color: <?php echo $stock_bajo['stock_bajo'] > 0 ? '#ef4444' : '#10b981'; ?>">
+                <div class="numero-grande" style="color: <?php echo $stock_bajo['stock_bajo'] > 0 ? '#ef4444' : '#d97706'; ?>">
                     <?php echo $stock_bajo['stock_bajo']; ?>
                 </div>
                 <div>Productos con Stock Bajo</div>
