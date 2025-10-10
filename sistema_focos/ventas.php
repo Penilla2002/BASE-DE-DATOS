@@ -284,7 +284,9 @@ if (isset($_GET['eliminar_item'])) {
         .btn-danger { background: var(--gradient-danger); color: white; }
         .btn-info { background: var(--gradient-info); color: white; }
         .btn-warning { background: var(--gradient-warning); color: white; }
-
+         .btn-purple {background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: white; }
+            
+         
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -549,7 +551,7 @@ if (isset($_GET['eliminar_item'])) {
         <div class="nav-inferior">
             <?php if ($_SESSION['rol'] == 'administrador'): ?>
                 <a href="reportes.php" class="btn btn-info">📊 Reportes</a>
-                <a href="gestion_inventario.php" class="btn btn-success">📦 Gestión Inventario</a>
+                <a href="gestion_inventario.php" class="btn btn-success">📦 Gestión de Inventario</a>
                 <a href="gestion_usuarios.php" class="btn btn-purple">👥 Gestión Usuarios</a>
             <?php endif; ?>
             <a href="logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
