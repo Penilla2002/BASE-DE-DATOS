@@ -116,7 +116,7 @@ if (isset($_POST['editar_usuario'])) {
             --warning-color: #f59e0b;
             --danger-color: #ef4444;
             --info-color: #3b82f6;
-            --purple-color: #8b5cf6;
+            --blue-color: #023281ff;;
             
             /* Degradados Amarillos/Dorados */
             --gradient-primary: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
@@ -127,7 +127,7 @@ if (isset($_POST['editar_usuario'])) {
             --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             --gradient-info: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            --gradient-blue-night: linear-gradient(135deg, #011a52 0%, #023281 50%, #0347b8 100%);
             
             /* Colores neutros */
             --light-bg: #fffbeb;
@@ -356,7 +356,7 @@ if (isset($_POST['editar_usuario'])) {
         .btn-danger { background: var(--gradient-danger); color: white; }
         .btn-warning { background: var(--gradient-warning); color: white; }
         .btn-info { background: var(--gradient-info); color: white; }
-        .btn-purple { background: var(--gradient-purple); color: white; }
+        .btn-blue { background: var(--gradient-blue-night); color: white; }
 
         .btn:hover {
             transform: translateY(-2px);
@@ -663,8 +663,8 @@ if (isset($_POST['editar_usuario'])) {
         <!-- Navegación inferior -->
         <div class="nav-inferior">
             <a href="reportes.php" class="btn btn-info">📊 Reportes</a>
-            <a href="gestion_inventario.php" class="btn btn-success">📦 Inventario</a>
-            <a href="reportes_avanzados.php" class="btn btn-purple">📅 Reportes Avanzados</a>
+            <a href="gestion_inventario.php" class="btn btn-success">📦 Gestión de Inventario</a>
+            <a href="reportes_avanzados.php" class="btn btn-blue">📅 Reportes por Peródo</a>
             <a href="ventas.php" class="btn btn-primary">🛒 Ventas</a>
             <a href="logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
         </div>
