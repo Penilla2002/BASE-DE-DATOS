@@ -25,6 +25,7 @@ include 'conexion.php';
             --warning-color: #f59e0b;
             --danger-color: #ef4444;
             --info-color: #3b82f6;
+            --blue-color: #023281ff;
             
             /* Degradados Amarillos/Dorados */
             --gradient-primary: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
@@ -35,6 +36,7 @@ include 'conexion.php';
             --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             --gradient-dark: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            --gradient-blue-night: linear-gradient(135deg, #011a52 0%, #023281 50%, #0347b8 100%);
             
             /* Colores neutros */
             --light-bg: #fffbeb;
@@ -234,8 +236,8 @@ include 'conexion.php';
             color: white;
         }
 
-        .btn-info {
-            background: var(--info-color);
+        .btn-blue {
+            background: var(--gradient-blue-night);
             color: white;
         }
 
@@ -251,7 +253,7 @@ include 'conexion.php';
 
         /* Resumen total */
         .resumen-total {
-            background: var(--gradient-success);
+            background: var(--gradient-primary);
             color: white;
             padding: 20px;
             border-radius: 10px;
@@ -447,13 +449,13 @@ include 'conexion.php';
         <div class="btn-container">
             <a href="ventas.php" class="btn btn-primary">🛒 Ir a Ventas</a>
             <a href="gestion_usuarios.php" class="btn btn-purple">👥 Gestión de Usuarios</a>
-            <a href="gestion_inventario.php" class="btn btn-info">📦 Gestión de Inventario</a>
-            <a href="reportes_avanzados.php" class="btn btn-success">📅 Reportes por Período</a>
+            <a href="gestion_inventario.php" class="btn btn-success">📦 Gestión de Inventario</a>
+            <a href="reportes_avanzados.php" class="btn btn-blue">📅 Reportes por Período</a>
             <a href="logout.php" class="btn btn-danger">🚪 Cerrar Sesión</a>
         </div>
         
         <div class="footer">
-            Sistema de Focos LED - Reportes generados el <?php echo date('d/m/Y H:i:s'); ?>
+            Sistema de Focos LED - Reportes generados el <?php date_default_timezone_set('America/Mexico_city'); echo date('d/m/Y H:i:s'); ?>
         </div>
     </div>
 </body>
