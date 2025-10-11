@@ -3,7 +3,7 @@
 
 $servidor = "localhost";
 $usuario = "root";
-$password = "P3N1ll4#1";
+$password = "FOCOSLED321";
 $base_datos = "sistema_focos";
 $puerto = 3306;
 
